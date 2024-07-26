@@ -67,7 +67,7 @@ Herramientas de gestión de proyectos (Trello, Jira)
 a. Selenium + BeautifulSoup para Scraping
 b. SQLAlchemy como ORM y comunicación con la base de datos SQL
 c. PostgreSQL 16 con Pgadmin 4
-d. Streamlit
+d. Gradio
 
 
 
