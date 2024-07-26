@@ -1,22 +1,39 @@
 import gradio as gr
-from app.database import SessionLocal
+from sqlalchemy.orm import Session
+from app.database import get_db
 from app.models import Quote, Author, Tag
 
-def search_quotes(query):
-    db = SessionLocal()
-    quotes = db.query(Quote).filter(Quote.text.ilike(f'%{query}%')).all()
-    results = []
+def fetch_quotes_from_db(db: Session):
+    quotes = db.query(Quote).all()
+    result = []
     for quote in quotes:
-        author = db.query(Author).filter(Author.id == quote.author_id).first()
-        tags = [tag.name for tag in quote.tags]
-        results.append({
-            'text': quote.text,
-            'author': author.name,
-            'tags': tags
-        })
-    return results
+        comment_lenght = min(500,len(quote.author.biography))
+        quote_data = {
+            "quote_text": quote.quote_text,
+            "author": {
+                "name": quote.author.name,
+                "birth_date": quote.author.birth_date,
+                "birth_place": quote.author.birth_place,
+                "biography": quote.author.biography[0:comment_lenght] + '...'
+            },
+            "tags": [tag.name for tag in quote.tags]
+        }
+        result.append(quote_data)
+    return result
 
-iface = gr.Interface(fn=search_quotes, inputs="text", outputs="json")
+def display_quotes():
+    db = next(get_db())
+    quotes = fetch_quotes_from_db(db)
+    db.close()
+    return quotes
 
-if __name__ == "__main__":
-    iface.launch()
+def create_interface():
+    def get_quotes():
+        return display_quotes()
+    
+    iface = gr.Interface(
+        fn=get_quotes,
+        inputs=[],
+        outputs=gr.JSON()
+    )
+    return iface
