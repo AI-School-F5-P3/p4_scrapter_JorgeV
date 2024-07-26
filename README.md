@@ -2,6 +2,10 @@
 
 ## Jorge Vázquez
 
+### Enlaces:
+
+SCRUM (Jira): https://bcf5projects.atlassian.net/jira/software/projects/SCRAP/boards/3?atlOrigin=eyJpIjoiNmIxMDhkN2NhOWNkNDg5YjllYWVjYmZiMjBkMDY4ZDMiLCJwIjoiaiJ9
+
 
 ### Planteamiento
  
@@ -60,10 +64,10 @@ Herramientas de gestión de proyectos (Trello, Jira)
 
 #### De las seleccionables, Se seleccionaron:
 
-Selenium + BeautifulSoup para Scraping
-SQLAlchemy como ORM y comunicación con la base de datos SQL
-PostgreSQL 16 con Pgadmin 4
-Streamlit
+a. Selenium + BeautifulSoup para Scraping
+b. SQLAlchemy como ORM y comunicación con la base de datos SQL
+c. PostgreSQL 16 con Pgadmin 4
+d. Streamlit
 
 
 
@@ -100,4 +104,12 @@ Streamlit
 2. Implementación de un frontend básico para visualizar los datos extraídos.
 3. Despliegue de la aplicación en un servidor web accesible públicamente.
 4. Utilizar otras webs de frases para aumentar la cantidad de frases scrapeadas.
+
+
+### Avances
+
+24/Jul Selenium + BeautifulSoup ya extraen todos los campos de todas las citas a lo largo de las 10 páginas del sitio web.
+
+
+### Learning munchies
 
