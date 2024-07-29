@@ -5,3 +5,4 @@ gradio_interface/gradio_test.py
 .env
 ejemplos/
 data/
+flagged/
