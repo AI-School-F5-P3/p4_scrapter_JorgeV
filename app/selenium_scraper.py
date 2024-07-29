@@ -10,7 +10,7 @@ base_url = 'https://quotes.toscrape.com'
 
 def scrape_all_quotes(driver):
 
-    page_url = '/page/10/' #Return to 1 after PostgreSQL persisting OK
+    page_url = '/page/10/' #10 = only last page 1 = all pages. After DB is fed, use 10 for quicker process
     all_quotes = []
 
     while page_url:
@@ -27,7 +27,7 @@ def scrape_all_quotes(driver):
             file_soup.write(str(soup))
         #
 
-        quotes = extract_quotes(soup)
+        quotes = extract_quotes(soup, page_url)
         all_quotes.extend(quotes)
         # Extract bio for each author
         for quote in quotes:
@@ -45,7 +45,7 @@ def scrape_all_quotes(driver):
     return all_quotes
 
 
-def extract_quotes(soup):
+def extract_quotes(soup, page_url):
 
     quotes = []
     for quote in soup.find_all('div', class_='quote'):
@@ -53,7 +53,7 @@ def extract_quotes(soup):
         author = quote.find('small', class_='author').get_text()
         tags = [tag.get_text() for tag in quote.find_all('a', class_='tag')]
         author_url = quote.find('a')['href']
-        quotes.append({'quote_text': quote_text, 'name': author, 'tags': tags, 'author_url': author_url})
+        quotes.append({'quote_text': quote_text, 'name': author, 'tags': tags, 'author_url': author_url, 'quote_source_url': base_url + page_url})
     return quotes
 
 
