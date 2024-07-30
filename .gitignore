@@ -1,4 +1,8 @@
 venv/
 app/__pycache__/
+gradio_interface/__pycache__/
+gradio_interface/gradio_test.py
 .env
 ejemplos/
+data/
+flagged/
